@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact | Tutor–Student Matching System</title>
+
+    <style>
+        body { font-family: Arial; margin: 0; background: #f4faff; }
+        header { background: #0b78d1; padding: 18px; color: white; text-align: center; }
+        nav { background: #003d66; padding: 12px; text-align: center; }
+        nav a { color: white; margin: 0 15px; font-weight: bold; text-decoration: none; }
+        section { padding: 40px; }
+
+        input, textarea, select {
+            width: 100%; padding: 10px; margin: 8px 0;
+            border-radius: 5px; border: 1px solid #aac;
+        }
+
+        button {
+            padding: 10px 20px; background: #0b78d1; 
+            border: none; color: white;
+            border-radius: 5px; cursor: pointer;
+        }
+
+        /* Tabs */
+        .tab-buttons button {
+            padding: 10px 20px;
+            background: #003d66;
+            margin-right: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .tab-buttons button.active {
+            background: #0b78d1;
+        }
+
+        .form-box {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        footer {
+            background: #003d66; padding: 15px; text-align: center;
+        }
+        footer a { color: white; text-decoration: none; margin: 0 15px; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Contact Us</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="matchmaking.html">Select Tutor</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="sdg.mapping.html">SDG Mapping</a>
+</nav>
+
+<section>
+    <h2>Get in Touch</h2>
+
+    <!-- Contact Form -->
+    <form onsubmit="contactSubmit(event)">
+        <label>Your Name</label>
+        <input id="cname" type="text" placeholder="Enter your name">
+
+        <label>Email</label>
+        <input id="cemail" type="email" placeholder="Enter your email">
+
+        <label>Message</label>
+        <textarea id="cmessage" rows="5" placeholder="Write your message here"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr><br>
+
+    <!-- Registration Forms -->
+    <h2>Registration Forms</h2>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button onclick="showForm('student')" class="active" id="btnStudent">Student Registration</button>
+        <button onclick="showForm('teacher')" id="btnTeacher">Teacher Registration</button>
+    </div>
+
+    <!-- Student Form -->
+    <div class="form-box" id="studentForm" style="display: block;">
+        <h3>Student Registration Form</h3>
+
+        <label>Full Name</label>
+        <input id="sname" type="text" placeholder="Enter your name">
+
+        <label>Class/Grade</label>
+        <input id="sclass" type="text" placeholder="Enter class">
+
+        <label>Preferred Subject</label>
+        <input id="ssubject" type="text" placeholder="Enter subject">
+
+        <label>Email</label>
+        <input id="semail" type="email" placeholder="Enter email">
+
+        <button onclick="registerStudent()">Register</button>
+    </div>
+
+    <!-- Teacher Form -->
+    <div class="form-box" id="teacherForm">
+        <h3>Teacher Registration Form</h3>
+
+        <label>Full Name</label>
+        <input id="tname" type="text" placeholder="Enter your name">
+
+        <label>Subject Expertise</label>
+        <input id="tsubject" type="text" placeholder="Enter subject">
+
+        <label>Experience (Years)</label>
+        <input id="texp" type="number" placeholder="Enter experience">
+
+        <label>Email</label>
+        <input id="temail" type="email" placeholder="Enter email">
+
+        <button onclick="registerTeacher()">Register</button>
+    </div>
+
+</section>
+
+<footer>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="matchmaking.html">Select Tutor</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="sdg.mapping.html">SDG Mapping</a>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    /* Contact Form Submit Alert */
+    function contactSubmit(event) {
+        event.preventDefault(); // stop page refresh
+
+        let name = document.getElementById("cname").value;
+        let email = document.getElementById("cemail").value;
+        let message = document.getElementById("cmessage").value;
+
+        if (name === "" || email === "" || message === "") {
+            alert("Please fill all contact form details!");
+            return;
+        }
+
+        alert("Thank you for contacting us, " + name + "! We will respond soon.");
+    }
+
+    // Show forms based on tab selection
+    function showForm(type) {
+        document.getElementById('studentForm').style.display = type === 'student' ? 'block' : 'none';
+        document.getElementById('teacherForm').style.display = type === 'teacher' ? 'block' : 'none';
+
+        document.getElementById('btnStudent').classList.toggle('active', type === 'student');
+        document.getElementById('btnTeacher').classList.toggle('active', type === 'teacher');
+    }
+
+    // Student registration validation
+    function registerStudent() {
+        let name = document.getElementById("sname").value;
+        let classs = document.getElementById("sclass").value;
+        let subject = document.getElementById("ssubject").value;
+        let email = document.getElementById("semail").value;
+
+        if(name === "" || classs === "" || subject === "" || email === "") {
+            alert("Please fill all student details!");
+            return;
+        }
+
+        alert("Student Registered Successfully:\nName: " + name + "\nClass: " + classs);
+    }
+
+    // Teacher registration validation
+    function registerTeacher() {
+        let name = document.getElementById("tname").value;
+        let subject = document.getElementById("tsubject").value;
+        let exp = document.getElementById("texp").value;
+        let email = document.getElementById("temail").value;
+
+        if(name === "" || subject === "" || exp === "" || email === "") {
+            alert("Please fill all teacher details!");
+            return;
+        }
+
+        alert("Teacher Registered Successfully:\nName: " + name + "\nSubject: " + subject);
+    }
+</script>
+
+</body>
+</html>
